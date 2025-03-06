@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import Home from './Home';
+import { useState } from 'react';
+import Landing from './Landing';
 
 function App() {
+
+  const [isSignedIn, setIsSignedIn] = useState(false) // placeholder for signing in functionality
+
+  const router = createBrowserRouter(createRoutesFromElements(
+    <Route path='/' element={ isSignedIn === true ? <Home/> : <Landing/>}/>
+  ))
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <RouterProvider router={router} />
     </div>
   );
 }
